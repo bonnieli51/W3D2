@@ -7,11 +7,6 @@ class HumanPlayer
  
   end
 
-  def make_guess
-    guessed_pos = self.prompt
-    @board.reveal(guessed_pos)
-    @board[guessed_pos]
-  end
 
   def prompt
     p 'Enter the position, separated by spaces'

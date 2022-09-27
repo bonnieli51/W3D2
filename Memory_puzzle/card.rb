@@ -3,6 +3,7 @@ class Card
   def initialize(value)
     @value = value
     @facedown = true
+
   end
 
   def hide
