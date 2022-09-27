@@ -2,9 +2,10 @@ require_relative "card.rb"
 require_relative "board.rb"
 
 class HumanPlayer
+  attr_accessor :score
 
   def initialize
- 
+    @score = 0
   end
 
 

@@ -37,30 +37,37 @@ class Game
       @board.render
       sleep(1)
       this_guess = make_guess#make_guess wil return card instace at pos
-      while previous_guess == this_guess
+      #while previous_guess == this_guess
         # debugger
-        this_guess = make_guess
-      end
+      #  this_guess = make_guess
+      #end
       @board.render
       sleep(1)
       if previous_guess.value == this_guess.value
         p "you got a match YAY"
-        @computer.delete(this_guess.value)  
+        @computer.delete(this_guess.value)
+        @current_player.score += 1  
       else 
         p "Boooooooo"
         previous_guess.hide
         this_guess.hide
       end
-      # system("clear")
+      system("clear")
       switch_players!
-      p @computer.known_cards
+      #p @computer.known_cards
     end
-    p "You win!  It only took you #{turns} turns!"
+    p "Game over!"
+    p "Player 1 got #{@player_1.score} points!"
+    p "Computer got #{@computer.score} points!"
   end
 
 
   def make_guess
     guessed_pos = @current_player.prompt
+    while !@board[guessed_pos].facedown
+      p 'Enter a valid position'
+      guessed_pos = @current_player.prompt
+    end
     letter = @board.reveal(guessed_pos)
     @computer.add(guessed_pos,letter)
     @board[guessed_pos]
