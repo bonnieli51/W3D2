@@ -1,5 +1,6 @@
 require_relative "card.rb"
 require_relative "board.rb"
+require_relative "humanplayer.rb"
 require "byebug"
 
 class Game
@@ -20,9 +21,9 @@ class Game
     while !self.over?
       @board.render
       turns += 1
-      previous_guess = make_guess
+      previous_guess = @player_1.make_guess
       @board.render
-      this_guess = make_guess#make_guess wil return card instace at pos
+      this_guess = @player_1.make_guess#make_guess wil return card instace at pos
       @board.render
       sleep(1)
       if previous_guess.value == this_guess.value
@@ -37,11 +38,6 @@ class Game
     p "You win!  It only took you #{turns} turns!"
   end
   
-  def make_guess
-    guessed_pos = @player_1.prompt
-    @board.reveal(guessed_pos)
-    @board[guessed_pos]
-  end
 end
 
 game_1 = Game.new
